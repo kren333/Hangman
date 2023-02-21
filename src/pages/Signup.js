@@ -4,6 +4,7 @@ import axios from 'axios';
 function Signup() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [dummy, setDummy] = useState("a");
 
     async function postUserInfo(e) {
         // TODO: figure out how to delete or navigate to a new page
@@ -15,8 +16,11 @@ function Signup() {
             // it should probably just return nothing or route you to a new page
             axios.post("http://localhost:4000/post_user_info", {username, password})
             .then((response) => {
-              if (response.statusText === "OK"){
-                setPassword("idkman");
+              if (response.data === true){
+                setDummy("b");
+              }
+              if (response.data === false){
+                setDummy("c");
               }
             })
         }
@@ -40,6 +44,7 @@ function Signup() {
                     </label>
                     <button type="submit">Submit Your Registration</button>
                 </form>
+                <p>dummy for debugging purposes is {dummy}</p>
             </center>
         </div>
     )

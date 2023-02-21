@@ -15,7 +15,8 @@ DONE
 - link an about page + routering + link logic
 - a signup page
 - sql connection for signup/signin page post requests
-- working signup info -> sql!
+- a sql user table of username/password information
+- working signup info -> sql! disallows insertion of repeat usernames as well
 - working login validation -> sql!
 - basic score variable
 

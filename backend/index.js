@@ -71,9 +71,23 @@ app.post("/post_user_info", async (req, res) => {
     con.connect(function(err) {
         if (err) throw err;
         console.log("Connected!");
-        con.query(`INSERT INTO users(username, password) VALUES (?,?) `, [username, password], function (err, result) {
-            if (err) throw err;
-            console.log('Row inserted:' + result.affectedRows);
+        // TODO: query into database; if the username exists send a message and don't insert
+        con.query(`SELECT COUNT(*) AS valid FROM users WHERE username = ? `, [username], function (err, result) {
+            if (err) throw err;     
+            if(result[0].valid === 0){
+                // insert into the db if the username is unique
+                con.query(`INSERT INTO users(username, password) VALUES (?,?) `, [username, password], function (err, result) {
+                    if (err) throw err;
+                    console.log('Row inserted:' + result.affectedRows);
+                    res.send(true);
+                    console.log(res)
+                });
+            }
+            else{
+                console.log("bad user")
+                res.send(false);
+                console.log(res)
+            }    
         });
     });
 })
@@ -83,7 +97,6 @@ app.post("/post_validation", async (req, res) => {
     let {username} = req.body;
     let {password} = req.body;
 
-    // TODO: figure out logic (send true if user/pass in db, false otherwise)
     // connect to sql db
     var con = mysql.createConnection({
         host: 'localhost',
