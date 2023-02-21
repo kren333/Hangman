@@ -40,7 +40,7 @@ function Home() {
       <form onSubmit = {postname}>
         <input type="text" placeholder="enter guess here" value = {name} onChange = {(e) => setName(e.target.value)} />
         <button type="submit">SUBMIT YOUR GUESS</button>
-        <p>your work is {name}</p>
+        <p>your word is {name}</p>
         <p>you have {gotit} got it</p>
         <p>score is {score}</p>
       </form>
