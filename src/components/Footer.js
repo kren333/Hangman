@@ -14,7 +14,7 @@ function Footer() {
         <div class="footer">
             <style>{css}</style>
             <center>
-                <p>sponsored by googlemetaamazonandyourmom</p>
+                <p>created by kevin ren, CMU '25</p>
             </center>
         </div>
     )

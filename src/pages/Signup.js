@@ -15,7 +15,7 @@ function Signup() {
             // attempt to pass user info to register with db
             axios.post("http://localhost:4000/post_user_info", {username, password})
             .then((response) => {
-              if (response.data == true) {
+              if (response.data === true) {
                 // display welcome message
                 setDummy("Registered your info!");
                 // TODO: code to link to new page w/login done
