@@ -3,6 +3,7 @@ const app = express();
 const port = 4000;
 const cors = require("cors");
 const fs = require("fs");
+var mysql = require('mysql');
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
@@ -13,6 +14,13 @@ var secretWord = '';
 fs.readFile("thesecretword.txt", (err, inputD) => {
     if (err) throw err;
     secretWord = inputD.toString();
+})
+
+// read sql password from git-ignored file
+var sql_pass = '';
+fs.readFile("password.txt", (err, inputD) => {
+    if (err) throw err;
+    sql_pass = inputD.toString();
 })
 
 const { EventEmitter } = require('events');
@@ -59,8 +67,9 @@ app.post("/post_user_info", async (req, res) => {
 app.post("/post_validation", async (req, res) => {
     let {username} = req.body;
     let {password} = req.body;
+    console.log(sql_pass)
     // TODO: figure out logic (send true if user/pass in db, false otherwise)
-    req.send(true);
+    res.send(true);
 })
 
 // listener
