@@ -12,6 +12,7 @@ function Signup() {
         try{
             // TODO: make a new post request for user and pass that interacts with the nosql or mysql database
             // rn all this will do is set the username equal to "OK"
+            // it should probably just return nothing or route you to a new page
             axios.post("http://localhost:4000/post_user_info", {username, password})
             .then((response) => {
               if (response.statusText === "OK"){
