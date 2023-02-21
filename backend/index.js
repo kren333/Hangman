@@ -58,8 +58,6 @@ app.post("/post_user_info", async (req, res) => {
     let {username} = req.body;
     let {password} = req.body;
     console.log(req.body)
-    console.log(username)
-    console.log(password)
     // connect to sql db
     var con = mysql.createConnection({
         host: 'localhost',
@@ -70,7 +68,6 @@ app.post("/post_user_info", async (req, res) => {
     
     con.connect(function(err) {
         if (err) throw err;
-        console.log("Connected!");
         // TODO: query into database; if the username exists send a message and don't insert
         con.query(`SELECT COUNT(*) AS valid FROM users WHERE username = ? `, [username], function (err, result) {
             if (err) throw err;     
@@ -80,13 +77,11 @@ app.post("/post_user_info", async (req, res) => {
                     if (err) throw err;
                     console.log('Row inserted:' + result.affectedRows);
                     res.send(true);
-                    console.log(res)
                 });
             }
             else{
                 console.log("bad user")
                 res.send(false);
-                console.log(res)
             }    
         });
     });

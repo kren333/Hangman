@@ -2,25 +2,27 @@ import React, {useState} from 'react';
 import axios from 'axios';
 
 function Signup() {
+    // hooks for username and password; set via form submission
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [dummy, setDummy] = useState("a");
+    // potential feedback message displayed when repeat username is entered
+    const [dummy, setDummy] = useState("");
 
     async function postUserInfo(e) {
-        // TODO: figure out how to delete or navigate to a new page
         e.preventDefault()
 
         try{
-            // TODO: make a new post request for user and pass that interacts with the nosql or mysql database
-            // rn all this will do is set the username equal to "OK"
-            // it should probably just return nothing or route you to a new page
+            // attempt to pass user info to register with db
             axios.post("http://localhost:4000/post_user_info", {username, password})
             .then((response) => {
-              if (response.data === true){
-                setDummy("b");
+              if (response.data == true) {
+                // display welcome message
+                setDummy("Registered your info!");
+                // TODO: code to link to new page w/login done
               }
               if (response.data === false){
-                setDummy("c");
+                // display warning message
+                setDummy("Username has already been taken; try again");
               }
             })
         }
@@ -44,7 +46,7 @@ function Signup() {
                     </label>
                     <button type="submit">Submit Your Registration</button>
                 </form>
-                <p>dummy for debugging purposes is {dummy}</p>
+                <p>{dummy}</p>
             </center>
         </div>
     )
