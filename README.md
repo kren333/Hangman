@@ -2,6 +2,20 @@ a tiny application to guess the secret word in the contents of a txt file!
 
 my first solo experience with connecting nodejs and react; was a fun time :)
 
+DONE
+- functioning frontend and backend
+- useState hooks that handle the entries as well as the username/password information
+- headers and footers
+- handles post requests
+- moved footer to bottom of page with css style formatting
+- read from file to access secret word in the backend
+- read from gitignored file to access sql password
+- link an about page + routering + link logic
+- a signup page
+- sql connection for signup/signin page post requests
+- working signup info -> sql!
+- working login validation -> sql!
+
 TODO
 - a word of the day
     - some metric that will lyk if you're getting closer or further
@@ -26,13 +40,4 @@ LONG TERM IDEAS
 - hangman?
     - now database could store user statistics
 
-DONE
-- functioning frontend and backend
-- headers and footers
-- handles post requests
-- moved footer to bottom of page with css style formatting
-- read from file to access secret word in the backend
-- link an about page + routering + link logic
-- a signup page
-- working signup info -> sql!
 

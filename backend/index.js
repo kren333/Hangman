@@ -102,6 +102,7 @@ app.post("/post_validation", async (req, res) => {
                 ret = true;
                 res.send(ret);
             }
+            console.log(ret)
         });
     });
 })
