@@ -4,18 +4,23 @@ import axios from 'axios';
 function Login() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    // was the login successful?
+    const [loginStatus, setLoginStatus] = useState("");
 
     async function postValidation(e) {
         // TODO: figure out how to delete or nav to new page
         e.preventDefault()
 
         try{
-            // TODO: make a new post request for user and pass that interacts with the nosql or mysql database
-            // rn all this will do is set the username equal to "OK"
             axios.post("http://localhost:4000/post_validation", {username, password})
             .then((response) => {
-            if (response.statusText === "OK"){
-                // TODO: get login validation logic put in
+            if (response.data === true){
+                // TODO: successful login
+                setLoginStatus("Successful login :)")
+            }
+            else {
+                // TODO: failed login
+                setLoginStatus("Failed login :/")
             }
             })
         }
@@ -39,6 +44,7 @@ function Login() {
                     </label>
                     <button type="submit">Login</button>
                 </form>
+                <p>{loginStatus}</p>
             </center>
         </div>
     )

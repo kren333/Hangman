@@ -1,3 +1,5 @@
+/* SETUP */
+
 const express = require("express");
 const app = express();
 const port = 4000;
@@ -7,7 +9,9 @@ var mysql = require('mysql');
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
-app.use(cors())
+app.use(cors());
+
+/* SETUP/CALLBACK INSTANTIATIONS */
 
 // code to read in the secret password
 var secretWord = '';
@@ -40,6 +44,8 @@ process.on('exit', () => {
 app.get("/", cors(), async (req, res) => {
     res.send("this is working");
 })
+
+/* REQUEST HANDLERS */
 
 // handles post requests for name submissions
 app.post("/post_name", async (req, res) => {
@@ -105,12 +111,9 @@ app.post("/post_validation", async (req, res) => {
         console.log("Connected!");
         con.query(`SELECT COUNT(*) AS valid FROM users WHERE username = ? AND password = ?`, [username, password], function (err, result) {
             if (err) throw err;
-            var ret = false;
-            if (result[0].valid > 0){
-                ret = true;
-                res.send(ret);
-            }
-            console.log(ret)
+            console.log(result[0].valid > 0)
+            // if valid login return true; otherwise false
+            return res.send(result[0].valid > 0);
         });
     });
 })
