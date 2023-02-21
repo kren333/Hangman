@@ -34,4 +34,5 @@ DONE
 - read from file to access secret word in the backend
 - link an about page + routering + link logic
 - a signup page
+- working signup info -> sql!
 

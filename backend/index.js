@@ -60,7 +60,22 @@ app.post("/post_user_info", async (req, res) => {
     console.log(req.body)
     console.log(username)
     console.log(password)
-    // TODO: figure out logic (put the user/pass combo into db and let user know)
+    // connect to sql db
+    var con = mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        password: sql_pass,
+        database: 'Hangman'
+    });
+    
+    con.connect(function(err) {
+        if (err) throw err;
+        console.log("Connected!");
+        con.query(`INSERT INTO users(username, password) VALUES (?,?) `, [username, password], function (err, result) {
+            if (err) throw err;
+            console.log('Row inserted:' + result.affectedRows);
+        });
+    });
 })
 
 // handles login requests
@@ -69,6 +84,18 @@ app.post("/post_validation", async (req, res) => {
     let {password} = req.body;
     console.log(sql_pass)
     // TODO: figure out logic (send true if user/pass in db, false otherwise)
+    // connect to sql db
+    var con = mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        password: sql_pass,
+        database: 'Hangman'
+    });
+    
+    con.connect(function(err) {
+        if (err) throw err;
+        console.log("Connected!");
+    });
     res.send(true);
 })
 
