@@ -82,7 +82,7 @@ app.post("/post_user_info", async (req, res) => {
 app.post("/post_validation", async (req, res) => {
     let {username} = req.body;
     let {password} = req.body;
-    console.log(sql_pass)
+
     // TODO: figure out logic (send true if user/pass in db, false otherwise)
     // connect to sql db
     var con = mysql.createConnection({
@@ -91,12 +91,19 @@ app.post("/post_validation", async (req, res) => {
         password: sql_pass,
         database: 'Hangman'
     });
-    
+
     con.connect(function(err) {
         if (err) throw err;
         console.log("Connected!");
+        con.query(`SELECT COUNT(*) AS valid FROM users WHERE username = ? AND password = ?`, [username, password], function (err, result) {
+            if (err) throw err;
+            var ret = false;
+            if (result[0].valid > 0){
+                ret = true;
+                res.send(ret);
+            }
+        });
     });
-    res.send(true);
 })
 
 // listener

@@ -16,7 +16,6 @@ function Login() {
             .then((response) => {
             if (response.statusText === "OK"){
                 // TODO: get login validation logic put in
-                setPassword("idkman");
             }
             })
         }
