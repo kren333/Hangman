@@ -3,7 +3,9 @@ a tiny application to guess the secret word in the contents of a txt file!
 my first solo experience with connecting nodejs and react; was a fun time :)
 
 DONE
-- functioning frontend and backend
+- functioning react frontend and nodejs backend
+- functional routes between home, about, signin, and signup pages
+- axios-based get and post requests
 - useState hooks that handle the entries as well as the username/password information
 - headers and footers
 - handles post requests
@@ -15,6 +17,7 @@ DONE
 - sql connection for signup/signin page post requests
 - working signup info -> sql!
 - working login validation -> sql!
+- basic score variable
 
 TODO
 - a word of the day
