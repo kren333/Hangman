@@ -5,7 +5,8 @@ function Login() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     // was the login successful?
-    const [loginStatus, setLoginStatus] = useState("");
+    const [loginMessage, setLoginMessage] = useState("");
+    const [loginStatus, setLoginStatus] = useState(false);
 
     async function postValidation(e) {
         // TODO: figure out how to delete or nav to new page
@@ -16,11 +17,13 @@ function Login() {
             .then((response) => {
             if (response.data === true){
                 // TODO: successful login
-                setLoginStatus("Successful login :)")
+                setLoginStatus(true)
+                setLoginMessage("Successful login :)")
             }
             else {
                 // TODO: failed login
-                setLoginStatus("Failed login :/")
+                setLoginStatus(false)
+                setLoginMessage("Failed login :/")
             }
             })
         }
@@ -44,7 +47,7 @@ function Login() {
                     </label>
                     <button type="submit">Login</button>
                 </form>
-                <p>{loginStatus}</p>
+                <p>{loginMessage}</p>
             </center>
         </div>
     )

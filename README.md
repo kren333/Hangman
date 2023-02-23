@@ -21,6 +21,10 @@ DONE
 - basic score variable
 
 TODO
+- login sessions: how do you make it not just say ur logged in?
+    - sign in with google?
+- and then store the score in a big table of scores w/userid and timestamp maybe 
+    - allows for summary stats for a given day
 - a word of the day
     - some metric that will lyk if you're getting closer or further
         - number of letters
