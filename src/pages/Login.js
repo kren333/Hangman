@@ -16,7 +16,7 @@ function Login() {
             axios.post("http://localhost:4000/post_validation", {username, password})
             .then((response) => {
             if (response.data === true){
-                // TODO: successful login
+                // TODO: successful login (how to connect this to a context + reducer usage?)
                 setLoginStatus(true)
                 setLoginMessage("Successful login :)")
             }

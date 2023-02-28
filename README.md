@@ -42,6 +42,7 @@ TODO
     - ideas:
         - group by answer content to get number of times each answer has been submitted
         - make a login to store user information
+    - a secret password that j brings you somewhere else!
 
 LONG TERM IDEAS
 - some sort of psychological game - can you guess what the most popular current input is?

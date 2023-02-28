@@ -53,10 +53,10 @@ app.post("/post_name", async (req, res) => {
     console.log(`tried ${name}`)
     if(name === secretWord){
         console.log(`and was right!!!`)
-        return res.send("");
+        return res.send(true);
     }
     console.log(`but word was ${secretWord}`)
-    res.send("not");
+    res.send(false);
 })
 
 // handles signup submissions

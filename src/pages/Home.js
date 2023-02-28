@@ -21,10 +21,17 @@ function Home() {
       axios.post("http://localhost:4000/post_name", {name})
       .then((response) => {
         if (response.statusText === "OK"){
-          setGotit(response.data);
+          if (response.data === true){
+            setGotit("");
+          }
+          else {
+            setGotit("not");
+          }
         }
         if (gotit===""){
-
+          // TODO: figure out how to send a request to the server that sends score to db 
+          // AND does it under the username logged in
+          // axios.post("http:")
         }
       })
     }
