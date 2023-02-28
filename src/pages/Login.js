@@ -33,6 +33,15 @@ function Login() {
     }
 
     return (
+        <>
+        {loginStatus ? (
+            <div>
+                <center>
+                <p>You are logged in!</p>
+                <p><a href="/">Go to Home</a></p>
+                </center>
+            </div>
+        ) : (
         <div classname="Login">
             <center>
                 <h1>Sign in to your account!</h1>
@@ -50,6 +59,9 @@ function Login() {
                 <p>{loginMessage}</p>
             </center>
         </div>
+        )
+        }
+        </>
     )
 }
 
