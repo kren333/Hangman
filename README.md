@@ -24,6 +24,8 @@ DONE
 
 TODO
 - sign in with google?
+- once you get to word, new component that lets you go back to home
+- logout button that erases localStorage
 - statistics page/summary stats for a given day; keep track of timestamps?
 - a word of the day
     - some metric that will lyk if you're getting closer or further

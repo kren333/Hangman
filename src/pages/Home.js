@@ -6,7 +6,7 @@ function Home() {
   // string submitted to the backend from form
   const [name, setName] = useState("");
   // string that is kinda a bool meaning if the word is correct
-  const [gotit, setGotit] = useState("not");
+  const [gotit, setGotit] = useState(false);
   // int score
   const [score, setScore] = useState(0);
 
@@ -22,7 +22,7 @@ function Home() {
       .then((response) => {
         if (response.statusText === "OK"){
           if (response.data === true){
-            setGotit("");
+            setGotit(true);
             // TODO: figure out how to send a request to the server that sends score to db 
             // AND does it under the username logged in
             let userinfo = localStorage.getItem("username");
@@ -33,7 +33,7 @@ function Home() {
                   alert(`sent score to server!`);
                 }
                 else {
-                  setGotit("popby");
+                  setGotit(false);
                 }
               })
             }
@@ -42,7 +42,7 @@ function Home() {
             }
           }
           else {
-            setGotit("ddd");
+            setGotit(false);
           }
         }
       })
@@ -53,7 +53,16 @@ function Home() {
   }
 
   return (
-    <div className="Home">
+    <>
+    {
+      gotit ?
+       <div>
+        <center>
+          <p>you got it!</p>
+          <p><a href="/">Go to Home</a></p>
+        </center>
+        </div>:
+      (<div className="Home">
       <center>
       <h1>Guess the magic word!</h1>
       <form onSubmit = {postname}>
@@ -61,11 +70,12 @@ function Home() {
         <button type="submit">SUBMIT YOUR GUESS</button>
       </form>
       <p>your word is {name}</p>
-        <p>you have {gotit} got it</p>
         <p>score is {score}</p>
-        <p>{localStorage.getItem("username")}</p>
+        {localStorage.getItem("username") != "" ? <p>Hi, {localStorage.getItem("username")}</p>: <p>you are not logged in. sign up + log in to create an account!</p>}
       </center>
-    </div>
+    </div>)
+    }
+    </>
   );
 }
 
