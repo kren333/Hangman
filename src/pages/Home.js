@@ -7,6 +7,8 @@ function Home() {
   const [name, setName] = useState("");
   // string that is kinda a bool meaning if the word is correct
   const [gotit, setGotit] = useState("not");
+  // bool version of the gotit state
+  const [gotitbool, setGotitbool] = useState(false);
   // int score
   const [score, setScore] = useState(0);
 
@@ -23,15 +25,17 @@ function Home() {
         if (response.statusText === "OK"){
           if (response.data === true){
             setGotit("");
+            setGotitbool(true);
+            let message = `sent score to server!`;
+            alert(message);
+            // TODO: figure out how to send a request to the server that sends score to db 
+            // AND does it under the username logged in
+            // axios.post("http:")
           }
           else {
             setGotit("not");
+            setGotitbool(false);
           }
-        }
-        if (gotit===""){
-          // TODO: figure out how to send a request to the server that sends score to db 
-          // AND does it under the username logged in
-          // axios.post("http:")
         }
       })
     }
@@ -47,10 +51,11 @@ function Home() {
       <form onSubmit = {postname}>
         <input type="text" placeholder="enter guess here" value = {name} onChange = {(e) => setName(e.target.value)} />
         <button type="submit">SUBMIT YOUR GUESS</button>
-        <p>your word is {name}</p>
+      </form>
+      <p>your word is {name}</p>
         <p>you have {gotit} got it</p>
         <p>score is {score}</p>
-      </form>
+        <p>{localStorage.getItem("username")}</p>
       </center>
     </div>
   );

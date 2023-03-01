@@ -18,6 +18,7 @@ function Login() {
             if (response.data === true){
                 // TODO: successful login (how to connect this to a context + reducer usage?)
                 setLoginStatus(true)
+                localStorage.setItem("username", username)
                 setLoginMessage("Successful login :)")
             }
             else {
@@ -37,6 +38,7 @@ function Login() {
         {loginStatus ? (
             <div>
                 <center>
+                <p>Username: {localStorage.getItem("username")}</p>
                 <p>You are logged in!</p>
                 <p><a href="/">Go to Home</a></p>
                 </center>
