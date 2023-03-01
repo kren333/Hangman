@@ -119,6 +119,31 @@ app.post("/post_validation", async (req, res) => {
     });
 })
 
+// handles signup submissions
+app.post("/post_score", async (req, res) => {
+    let {userinfo} = req.body;
+    let {score} = req.body;
+    console.log(req.body)
+    // connect to sql db
+    var con = mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        password: sql_pass,
+        database: 'Hangman'
+    });
+    
+    con.connect(function(err) {
+        if (err) throw err;
+        console.log("connected!")
+        // insert score + username combo into the scores db
+        con.query(`INSERT INTO scores(score, username) VALUES (?,?) `, [score, userinfo], function (err, result) {
+            if (err) throw err;
+            console.log('Row inserted:' + result.affectedRows);
+            res.send(true);
+        });
+    });
+})
+
 // listener
 app.listen(port, () => {
     console.log(`listening at ${port}`);

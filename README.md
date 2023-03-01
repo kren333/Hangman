@@ -19,12 +19,12 @@ DONE
 - working signup info -> sql! disallows insertion of repeat usernames as well
 - working login validation -> sql!
 - basic score variable
+    - table of scores and usernames
+- basic login sessions (keeps track of username) stored in localStorage
 
 TODO
-- login sessions: how do you make it not just say ur logged in?
-    - sign in with google?
-- and then store the score in a big table of scores w/userid and timestamp maybe 
-    - allows for summary stats for a given day
+- sign in with google?
+- statistics page/summary stats for a given day; keep track of timestamps?
 - a word of the day
     - some metric that will lyk if you're getting closer or further
         - number of letters

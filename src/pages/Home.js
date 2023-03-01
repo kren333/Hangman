@@ -7,8 +7,6 @@ function Home() {
   const [name, setName] = useState("");
   // string that is kinda a bool meaning if the word is correct
   const [gotit, setGotit] = useState("not");
-  // bool version of the gotit state
-  const [gotitbool, setGotitbool] = useState(false);
   // int score
   const [score, setScore] = useState(0);
 
@@ -25,16 +23,26 @@ function Home() {
         if (response.statusText === "OK"){
           if (response.data === true){
             setGotit("");
-            setGotitbool(true);
-            let message = `sent score to server!`;
-            alert(message);
             // TODO: figure out how to send a request to the server that sends score to db 
             // AND does it under the username logged in
-            // axios.post("http:")
+            let userinfo = localStorage.getItem("username");
+            try {
+              axios.post("http://localhost:4000/post_score", {score, userinfo})
+              .then((response) => {
+                if(response.statusText==="OK"){
+                  alert(`sent score to server!`);
+                }
+                else {
+                  setGotit("popby");
+                }
+              })
+            }
+            catch (error) {
+              console.log(error)
+            }
           }
           else {
-            setGotit("not");
-            setGotitbool(false);
+            setGotit("ddd");
           }
         }
       })
