@@ -71,7 +71,7 @@ function Home() {
       </form>
       <p>your word is {name}</p>
         <p>score is {score}</p>
-        {localStorage.getItem("username") != "" ? <p>Hi, {localStorage.getItem("username")}</p>: <p>you are not logged in. sign up + log in to create an account!</p>}
+        {localStorage.getItem("username") !== "" ? <p>Hi, {localStorage.getItem("username")}</p>: <p>you are not logged in. sign up + log in to create an account!</p>}
       </center>
     </div>)
     }

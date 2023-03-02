@@ -11,7 +11,7 @@ function Login() {
     async function postValidation(e) {
         // TODO: figure out how to delete or nav to new page
         e.preventDefault()
-
+        localStorage.setItem("username", "")
         try{
             axios.post("http://localhost:4000/post_validation", {username, password})
             .then((response) => {
