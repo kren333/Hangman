@@ -4,21 +4,21 @@ import axios from 'axios';
 
 function Home() {
   // string submitted to the backend from form
-  const [name, setName] = useState("");
+  const [guess, setGuess] = useState("");
   // string that is kinda a bool meaning if the word is correct
   const [gotit, setGotit] = useState(false);
   // int score
   const [score, setScore] = useState(0);
 
   // sends the submission to the backend for processing and updates whether you got it
-  async function postname (e) {
+  async function postguess (e) {
     e.preventDefault()
 
     // TODO: allow for saving of winning score
     setScore(score + 1)
 
     try {
-      axios.post("http://localhost:4000/post_name", {name})
+      axios.post("http://localhost:4000/post_guess", {guess})
       .then((response) => {
         if (response.statusText === "OK"){
           if (response.data === true){
@@ -26,7 +26,7 @@ function Home() {
             // TODO: figure out how to send a request to the server that sends score to db 
             // AND does it under the username logged in
             let userinfo = localStorage.getItem("username");
-            let wordSubmitted = name;
+            let wordSubmitted = guess;
             try {
               axios.post("http://localhost:4000/post_score", {score, userinfo, wordSubmitted})
               .then((response) => {
@@ -66,11 +66,11 @@ function Home() {
       (<div className="Home">
       <center>
       <h1>Guess the magic word!</h1>
-      <form onSubmit = {postname}>
-        <input type="text" placeholder="enter guess here" value = {name} onChange = {(e) => setName(e.target.value)} />
+      <form onSubmit = {postguess}>
+        <input type="text" placeholder="enter guess here" value = {guess} onChange = {(e) => setGuess(e.target.value)} />
         <button type="submit">SUBMIT YOUR GUESS</button>
       </form>
-      <p>your word is {name}</p>
+      <p>your word is {guess}</p>
         <p>score is {score}</p>
         {localStorage.getItem("username") !== "" ? <p>Hi, {localStorage.getItem("username")}</p>: <p>you are not logged in. sign up + log in to create an account!</p>}
       </center>

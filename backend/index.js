@@ -51,10 +51,10 @@ app.get("/", cors(), async (req, res) => {
 /* REQUEST HANDLERS */
 
 // handles post requests for name submissions
-app.post("/post_name", async (req, res) => {
-    let {name} = req.body;
-    console.log(`tried ${name}`)
-    if(name === secretWord){
+app.post("/post_guess", async (req, res) => {
+    let {guess} = req.body;
+    console.log(`tried ${guess}`)
+    if(guess === secretWord){
         console.log(`and was right!!!`)
         // TODO: do a new magic word
         ;(async () => {

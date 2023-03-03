@@ -27,6 +27,7 @@ DONE
 
 TODO
 - refactor 'word' in home.js
+- look into cookies for safer login?
 - sign in with google?
 - once you get to word, new component that lets you go back to home
 - change logout to erase localstorage and still display conditional greeting message
