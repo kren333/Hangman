@@ -13,11 +13,21 @@ app.use(cors());
 
 /* SETUP/CALLBACK INSTANTIATIONS */
 
+var poopy = '';
+;(async () => {
+    const nthline = require('nthline'),
+      filePath = 'thesecretword.txt',
+      rowIndex = 0
+   
+    poopy = await nthline(rowIndex, filePath);
+  })()
+
 // code to read in the secret password
 var secretWord = '';
 fs.readFile("thesecretword.txt", (err, inputD) => {
     if (err) throw err;
     secretWord = inputD.toString();
+    console.log(poopy)
 })
 
 // read sql password from git-ignored file
@@ -35,15 +45,15 @@ emitter.on("somethinghappened", () =>
     console.log("you guessed the magic word!")
 );
 
-// goodbye message
-process.on('exit', () => {
-    console.log("byebye");
-})
-
 // confirmation message
 app.get("/", cors(), async (req, res) => {
     res.send("this is working");
 })
+
+// TODO: resets the magic word (to be called on success)
+async function resetPassword() {
+
+}
 
 /* REQUEST HANDLERS */
 
@@ -53,6 +63,7 @@ app.post("/post_name", async (req, res) => {
     console.log(`tried ${name}`)
     if(name === secretWord){
         console.log(`and was right!!!`)
+        // TODO: do a new magic word
         return res.send(true);
     }
     console.log(`but word was ${secretWord}`)

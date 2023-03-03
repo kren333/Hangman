@@ -21,11 +21,12 @@ DONE
 - basic score variable
     - table of scores and usernames
 - basic login sessions (keeps track of username) stored in localStorage
+- logout button that resets variable kept in localStorage
 
 TODO
 - sign in with google?
 - once you get to word, new component that lets you go back to home
-- logout button that erases localStorage
+- change logout to erase localstorage and still display conditional greeting message
 - statistics page/summary stats for a given day; keep track of timestamps?
 - a word of the day
     - some metric that will lyk if you're getting closer or further
@@ -50,5 +51,6 @@ LONG TERM IDEAS
 - some sort of psychological game - can you guess what the most popular current input is?
 - hangman?
     - now database could store user statistics
+- an nlp bot you can play 20 questions with?
 
 

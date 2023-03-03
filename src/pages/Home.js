@@ -59,7 +59,7 @@ function Home() {
        <div>
         <center>
           <p>you got it!</p>
-          <p><a href="/">Go to Home</a></p>
+          <p><a href="/">run it back :0</a></p>
         </center>
         </div>:
       (<div className="Home">

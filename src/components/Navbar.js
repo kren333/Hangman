@@ -12,9 +12,7 @@ function Navbar() {
                 <a href="/signup">Signup</a>
                 <a href="/login">Login</a>
                 <a href="/about">About</a>
-                <form>
-                  <button type="button" onClick={buttonhandler}>Logout</button>
-                </form>
+                <button type="button" onClick={buttonhandler}>Logout</button>
               </div>
             </nav>
     )
