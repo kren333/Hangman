@@ -13,22 +13,16 @@ app.use(cors());
 
 /* SETUP/CALLBACK INSTANTIATIONS */
 
-var poopy = '';
+// code to read in the secret password
+var secretWord = '';
 ;(async () => {
     const nthline = require('nthline'),
       filePath = 'thesecretword.txt',
       rowIndex = 0
    
-    poopy = await nthline(rowIndex, filePath);
+      secretWord = await nthline(rowIndex, filePath);
+      console.log(`secret word is ${secretWord}`)
   })()
-
-// code to read in the secret password
-var secretWord = '';
-fs.readFile("thesecretword.txt", (err, inputD) => {
-    if (err) throw err;
-    secretWord = inputD.toString();
-    console.log(poopy)
-})
 
 // read sql password from git-ignored file
 var sql_pass = '';
@@ -50,11 +44,6 @@ app.get("/", cors(), async (req, res) => {
     res.send("this is working");
 })
 
-// TODO: resets the magic word (to be called on success)
-async function resetPassword() {
-
-}
-
 /* REQUEST HANDLERS */
 
 // handles post requests for name submissions
@@ -64,6 +53,19 @@ app.post("/post_name", async (req, res) => {
     if(name === secretWord){
         console.log(`and was right!!!`)
         // TODO: do a new magic word
+        function between(min, max) {  
+            return Math.floor(
+              Math.random() * (max - min + 1) + min
+            )
+          }
+        ;(async () => {
+            const nthlinereset = require('nthline'),
+              filePath = 'thesecretword.txt',
+              rowIndex = between(0, 6)
+           
+              secretWord = await nthlinereset(rowIndex, filePath);
+              console.log(`new secret word is ${secretWord}`)
+          })()
         return res.send(true);
     }
     console.log(`but word was ${secretWord}`)
