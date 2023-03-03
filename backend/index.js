@@ -6,6 +6,7 @@ const port = 4000;
 const cors = require("cors");
 const fs = require("fs");
 var mysql = require('mysql');
+const utils = require("./utils.js")
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
@@ -13,35 +14,15 @@ app.use(cors());
 
 /* SETUP/CALLBACK INSTANTIATIONS */
 
-// helper function for rng rows
-function between(min, max) {  
-    return Math.floor(
-      Math.random() * (max - min + 1) + min
-    )
-  }
-
-// get number of candidate secret words
-const readline = require('readline');
-var file = 'thesecretword.txt';
-var linesCount = 0;
-var rl = readline.createInterface({
- input: fs.createReadStream(file),
- output: process.stdout,
- terminal: false
-});
-rl.on('line', function (line) {
-    linesCount++; // on each linebreak, add +1 to 'linesCount'
-});
-rl.on('close', function () {
-    console.log(`${linesCount} total words to guess from`);
-});
-
 // code to read in the secret password
 var secretWord = '';
+var file = 'thesecretword.txt';
+var numberLines = utils.numberLines(file);
+console.log(numberLines)
 ;(async () => {
     const nthline = require('nthline'),
       filePath = file,
-      rowIndex = between (0, linesCount - 1)
+      rowIndex = utils.between (0, await utils.numberLines(file) - 1)
    
       secretWord = await nthline(rowIndex, filePath);
       console.log(`secret word is ${secretWord}`)
@@ -79,7 +60,7 @@ app.post("/post_name", async (req, res) => {
         ;(async () => {
             const nthlinereset = require('nthline'),
               filePath = file,
-              rowIndex = between(0, linesCount - 1)
+              rowIndex = utils.between(0, utils.numberLines(file) - 1)
            
               secretWord = await nthlinereset(rowIndex, filePath);
               console.log(`new secret word is ${secretWord}`)
@@ -154,6 +135,7 @@ app.post("/post_validation", async (req, res) => {
 app.post("/post_score", async (req, res) => {
     let {userinfo} = req.body;
     let {score} = req.body;
+    let {wordSubmitted} = req.body;
     console.log(req.body)
     // connect to sql db
     var con = mysql.createConnection({
@@ -168,7 +150,7 @@ app.post("/post_score", async (req, res) => {
         console.log("connected!")
         // insert score + username combo into the scores db, IF user is logged in
         if(userinfo !== '') {
-            con.query(`INSERT INTO scores(score, username) VALUES (?,?) `, [score, userinfo], function (err, result) {
+            con.query(`INSERT INTO scores(score, username, submittedWord) VALUES (?,?,?) `, [score, userinfo, wordSubmitted], function (err, result) {
                 if (err) throw err;
                 console.log('Row inserted:' + result.affectedRows);
                 return res.send(true)

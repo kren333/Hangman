@@ -22,8 +22,11 @@ DONE
     - table of scores and usernames
 - basic login sessions (keeps track of username) stored in localStorage
 - logout button that resets variable kept in localStorage
+- conditionally rendered components
+- randomized word selection and word/score resetting and successful guess
 
 TODO
+- refactor 'word' in home.js
 - sign in with google?
 - once you get to word, new component that lets you go back to home
 - change logout to erase localstorage and still display conditional greeting message
@@ -46,6 +49,9 @@ TODO
         - group by answer content to get number of times each answer has been submitted
         - make a login to store user information
     - a secret password that j brings you somewhere else!
+
+BUGS
+- if you inspect element an unseen username into localstorage, submitting a score will explode ur backend bc  score needs to be a foreign key e.g. all usernames need to be in the users table (also you can submit scores on behalf of players you aren't signed in for)
 
 LONG TERM IDEAS
 - some sort of psychological game - can you guess what the most popular current input is?

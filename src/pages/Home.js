@@ -26,8 +26,9 @@ function Home() {
             // TODO: figure out how to send a request to the server that sends score to db 
             // AND does it under the username logged in
             let userinfo = localStorage.getItem("username");
+            let wordSubmitted = name;
             try {
-              axios.post("http://localhost:4000/post_score", {score, userinfo})
+              axios.post("http://localhost:4000/post_score", {score, userinfo, wordSubmitted})
               .then((response) => {
                 if(response.data === true){
                   alert(`sent score to server!`);
