@@ -13,12 +13,35 @@ app.use(cors());
 
 /* SETUP/CALLBACK INSTANTIATIONS */
 
+// helper function for rng rows
+function between(min, max) {  
+    return Math.floor(
+      Math.random() * (max - min + 1) + min
+    )
+  }
+
+// get number of candidate secret words
+const readline = require('readline');
+var file = 'thesecretword.txt';
+var linesCount = 0;
+var rl = readline.createInterface({
+ input: fs.createReadStream(file),
+ output: process.stdout,
+ terminal: false
+});
+rl.on('line', function (line) {
+    linesCount++; // on each linebreak, add +1 to 'linesCount'
+});
+rl.on('close', function () {
+    console.log(`${linesCount} total words to guess from`);
+});
+
 // code to read in the secret password
 var secretWord = '';
 ;(async () => {
     const nthline = require('nthline'),
-      filePath = 'thesecretword.txt',
-      rowIndex = 0
+      filePath = file,
+      rowIndex = between (0, linesCount - 1)
    
       secretWord = await nthline(rowIndex, filePath);
       console.log(`secret word is ${secretWord}`)
@@ -53,15 +76,10 @@ app.post("/post_name", async (req, res) => {
     if(name === secretWord){
         console.log(`and was right!!!`)
         // TODO: do a new magic word
-        function between(min, max) {  
-            return Math.floor(
-              Math.random() * (max - min + 1) + min
-            )
-          }
         ;(async () => {
             const nthlinereset = require('nthline'),
-              filePath = 'thesecretword.txt',
-              rowIndex = between(0, 6)
+              filePath = file,
+              rowIndex = between(0, linesCount - 1)
            
               secretWord = await nthlinereset(rowIndex, filePath);
               console.log(`new secret word is ${secretWord}`)
