@@ -29,11 +29,11 @@ function Home() {
             try {
               axios.post("http://localhost:4000/post_score", {score, userinfo})
               .then((response) => {
-                if(response.statusText==="OK"){
+                if(response.data === true){
                   alert(`sent score to server!`);
                 }
                 else {
-                  setGotit(false);
+                  alert(`please login to have your score saved!`);
                 }
               })
             }

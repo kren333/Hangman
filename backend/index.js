@@ -166,12 +166,18 @@ app.post("/post_score", async (req, res) => {
     con.connect(function(err) {
         if (err) throw err;
         console.log("connected!")
-        // insert score + username combo into the scores db
-        con.query(`INSERT INTO scores(score, username) VALUES (?,?) `, [score, userinfo], function (err, result) {
-            if (err) throw err;
-            console.log('Row inserted:' + result.affectedRows);
-            res.send(true);
-        });
+        // insert score + username combo into the scores db, IF user is logged in
+        if(userinfo !== '') {
+            con.query(`INSERT INTO scores(score, username) VALUES (?,?) `, [score, userinfo], function (err, result) {
+                if (err) throw err;
+                console.log('Row inserted:' + result.affectedRows);
+                return res.send(true)
+            });
+        }
+        else {
+            console.log("user was not logged in")
+            return res.send(false);
+        }
     });
 })
 
