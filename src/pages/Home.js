@@ -10,7 +10,7 @@ function Home() {
   // int score
   const [score, setScore] = useState(0);
   // high score; displayed on successful guess of the word
-  const [highScore, setHighScore] = useState(-1);
+  const [highScore, setHighScore] = useState("");
 
   // sends the submission to the backend for processing and updates whether you got it
   async function postguess (e) {
@@ -36,9 +36,9 @@ function Home() {
                   alert(`sent score to server!`);
                   // TODO: try to get the high (lowest) score done by the user and store it in a variable
                   try {
-                    axios.get("http://localhost:4000/get_highscore")
+                    axios.get("http://localhost:4000/get_highscore", { params: { user: userinfo } })
                     .then((response) => {
-                      console.log(response)
+                      setHighScore(response);
                     })
                   }
                   catch (error) {

@@ -58,13 +58,12 @@ app.get("/get_highscore/:user", cors(), async (req, res) => {
     var con = utils.connectToDB(sql_pass);
     con.connect(function (err) {
         if (err) throw err;
-        con.query("SELECT * FROM users", function (err, result)  {
+        con.query("SELECT MIN(score) as minscore FROM scores WHERE username = ?", [user], function (err, result)  {
             if (err) throw err;
-            console.log(result)
+            // this sends the min score of the user back to the frontend as a string
+            res.send(`${result[0].minscore}`);
         });
-        console.log()
     })
-    res.send(user);
 })
 
 // handles post requests for name submissions
