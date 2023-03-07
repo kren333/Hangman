@@ -2,7 +2,7 @@
 
 const express = require("express");
 const app = express();
-const port = 4000;
+const port = process.env.PORT || 4000;
 const cors = require("cors");
 const fs = require("fs");
 var mysql = require('mysql');
@@ -43,12 +43,29 @@ emitter.on("somethinghappened", () =>
     console.log("you guessed the magic word!")
 );
 
+/* REQUEST HANDLERS */
+
 // confirmation message
 app.get("/", cors(), async (req, res) => {
     res.send("this is working");
 })
 
-/* REQUEST HANDLERS */
+// TODO: get list of high scores (top x + username of each high score)
+
+// get high score variable given user information from sql table
+app.get("/get_highscore/:user", cors(), async (req, res) => {
+    let {user} = req.params;
+    var con = utils.connectToDB(sql_pass);
+    con.connect(function (err) {
+        if (err) throw err;
+        con.query("SELECT * FROM users", function (err, result)  {
+            if (err) throw err;
+            console.log(result)
+        });
+        console.log()
+    })
+    res.send(user);
+})
 
 // handles post requests for name submissions
 app.post("/post_guess", async (req, res) => {
@@ -77,12 +94,7 @@ app.post("/post_user_info", async (req, res) => {
     let {password} = req.body;
     console.log(req.body)
     // connect to sql db
-    var con = mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        password: sql_pass,
-        database: 'Hangman'
-    });
+    var con = utils.connectToDB(sql_pass);
     
     con.connect(function(err) {
         if (err) throw err;
@@ -112,12 +124,7 @@ app.post("/post_validation", async (req, res) => {
     let {password} = req.body;
 
     // connect to sql db
-    var con = mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        password: sql_pass,
-        database: 'Hangman'
-    });
+    var con = utils.connectToDB(sql_pass);
 
     con.connect(function(err) {
         if (err) throw err;
@@ -138,12 +145,7 @@ app.post("/post_score", async (req, res) => {
     let {wordSubmitted} = req.body;
     console.log(req.body)
     // connect to sql db
-    var con = mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        password: sql_pass,
-        database: 'Hangman'
-    });
+    var con = utils.connectToDB(sql_pass);
     
     con.connect(function(err) {
         if (err) throw err;

@@ -13,4 +13,14 @@ function numberLines (file) {
     return split_lines.length;
 }
 
-module.exports = {between, numberLines};
+function connectToDB (sql_pass) {
+    var mysql = require('mysql');
+    return mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        password: sql_pass,
+        database: 'Hangman'
+    });
+}
+
+module.exports = {between, numberLines, connectToDB};

@@ -26,7 +26,7 @@ DONE
 - randomized word selection and word/score resetting and successful guess
 
 TODO
-- refactor 'word' in home.js
+- high score logic
 - look into cookies for safer login?
 - sign in with google?
 - once you get to word, new component that lets you go back to home
@@ -48,7 +48,6 @@ TODO
             - the word itself
     - ideas:
         - group by answer content to get number of times each answer has been submitted
-        - make a login to store user information
     - a secret password that j brings you somewhere else!
 
 BUGS

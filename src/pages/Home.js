@@ -9,6 +9,8 @@ function Home() {
   const [gotit, setGotit] = useState(false);
   // int score
   const [score, setScore] = useState(0);
+  // high score; displayed on successful guess of the word
+  const [highScore, setHighScore] = useState(-1);
 
   // sends the submission to the backend for processing and updates whether you got it
   async function postguess (e) {
@@ -21,17 +23,27 @@ function Home() {
       axios.post("http://localhost:4000/post_guess", {guess})
       .then((response) => {
         if (response.statusText === "OK"){
+          // correct answer
           if (response.data === true){
             setGotit(true);
-            // TODO: figure out how to send a request to the server that sends score to db 
-            // AND does it under the username logged in
             let userinfo = localStorage.getItem("username");
             let wordSubmitted = guess;
+            // sends the score to the server
             try {
               axios.post("http://localhost:4000/post_score", {score, userinfo, wordSubmitted})
               .then((response) => {
                 if(response.data === true){
                   alert(`sent score to server!`);
+                  // TODO: try to get the high (lowest) score done by the user and store it in a variable
+                  try {
+                    axios.get("http://localhost:4000/get_highscore")
+                    .then((response) => {
+                      console.log(response)
+                    })
+                  }
+                  catch (error) {
+                    console.log(error)
+                  }
                 }
                 else {
                   alert(`please login to have your score saved!`);
@@ -49,7 +61,7 @@ function Home() {
       })
     }
     catch (error) {
-      console.log("error")
+      console.log(error)
     }
   }
 
@@ -60,6 +72,7 @@ function Home() {
        <div>
         <center>
           <p>you got it!</p>
+          <p>your high score: {highScore}</p>
           <p><a href="/">run it back :0</a></p>
         </center>
         </div>:
@@ -72,7 +85,12 @@ function Home() {
       </form>
       <p>your word is {guess}</p>
         <p>score is {score}</p>
-        {localStorage.getItem("username") !== "" ? <p>Hi, {localStorage.getItem("username")}</p>: <p>you are not logged in. sign up + log in to create an account!</p>}
+        {localStorage.getItem("username") !== "" ? 
+        <div>
+        <p>Hi, {localStorage.getItem("username")}</p>
+        <p>Your high score:</p>
+        </div>: 
+        <p>you are not logged in. sign up + log in to create an account!</p>}
       </center>
     </div>)
     }

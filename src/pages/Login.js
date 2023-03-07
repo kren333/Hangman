@@ -9,7 +9,6 @@ function Login() {
     const [loginStatus, setLoginStatus] = useState(false);
 
     async function postValidation(e) {
-        // TODO: figure out how to delete or nav to new page
         e.preventDefault()
         localStorage.setItem("username", "")
         try{
