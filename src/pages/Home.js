@@ -33,17 +33,18 @@ function Home() {
               axios.post("http://localhost:4000/post_score", {score, userinfo, wordSubmitted})
               .then((response) => {
                 if(response.data === true){
-                  alert(`sent score to server!`);
                   // TODO: try to get the high (lowest) score done by the user and store it in a variable
                   try {
-                    axios.get("http://localhost:4000/get_highscore", { params: { user: userinfo } })
+                    axios.get(`http://localhost:4000/get_highscore/${userinfo}`)
                     .then((response) => {
-                      setHighScore(response);
+                      console.log("set highscore?")
+                      setHighScore(response.data);
                     })
                   }
                   catch (error) {
                     console.log(error)
                   }
+                  alert(`sent score to server!`);
                 }
                 else {
                   alert(`please login to have your score saved!`);
@@ -88,7 +89,6 @@ function Home() {
         {localStorage.getItem("username") !== "" ? 
         <div>
         <p>Hi, {localStorage.getItem("username")}</p>
-        <p>Your high score:</p>
         </div>: 
         <p>you are not logged in. sign up + log in to create an account!</p>}
       </center>

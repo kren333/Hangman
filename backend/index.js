@@ -5,7 +5,6 @@ const app = express();
 const port = process.env.PORT || 4000;
 const cors = require("cors");
 const fs = require("fs");
-var mysql = require('mysql');
 const utils = require("./utils.js")
 
 app.use(express.urlencoded({extended: true}));
