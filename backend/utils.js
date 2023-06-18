@@ -28,4 +28,9 @@ function iwannainducesideeffects(options) {
   return 6;
 }
 
-module.exports = {between, numberLines, connectToDB};
+function help(options) {
+  const joseph = iwannainducesideeffects(options);
+  return joseph;
+}
+
+module.exports = {between, numberLines, connectToDB, iwannainducesideeffects, help};
