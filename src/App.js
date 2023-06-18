@@ -1,12 +1,12 @@
-import './App.css';
-import React from 'react';
-import {Routes, Route} from 'react-router-dom';
-import Home from './pages/Home.js';
-import About from './pages/About.js';
-import Login from './pages/Login.js';
-import Signup from './pages/Signup.js';
-import Footer from './components/Footer.js';
-import Navbar from './components/Navbar.js';
+// import './App.css';
+const React = require('react');
+const {Routes, Route} = require('react-router-dom');
+const Home = require('./pages/Home').default;
+const About = require('./pages/About').default;
+const Login = require('./pages/Login').default;
+const Signup = require('./pages/Signup').default;
+const Footer = require('./components/Footer').default;
+const Navbar = require('./components/Navbar').default;
 
 
 function App() {

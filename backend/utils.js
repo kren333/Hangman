@@ -23,4 +23,9 @@ function connectToDB (sql_pass) {
     });
 }
 
+function iwannainducesideeffects(options) {
+  options.poopy = 5;
+  return 6;
+}
+
 module.exports = {between, numberLines, connectToDB};

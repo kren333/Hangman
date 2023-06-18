@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import axios from 'axios';
+const {React, useState} = require('react');
+const axios = require('axios');
 
 function Signup() {
     // hooks for username and password; set via form submission
