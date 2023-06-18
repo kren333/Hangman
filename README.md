@@ -27,6 +27,10 @@ DONE
 - basic high score logic for a given player, implemented using custom get request
 
 TODO
+BACKEND
+- use joi for input validation in post requests
+- put requests for changing username/password
+- delete requests for deleting user info
 - look into cookies for safer login?
     - change logout to erase localstorage and still display conditional greeting message
 - sign in with google?

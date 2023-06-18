@@ -118,6 +118,11 @@ app.post("/post_user_info", async (req, res) => {
 
 // handles login requests
 app.post("/post_validation", async (req, res) => {
+    // INPUT VALIDATION (TODO: UPDATE
+    if (!req.body.username || !req.body.password) {
+        res.status(400).send("please fill in all information");
+        return; 
+    }
     let {username} = req.body;
     let {password} = req.body;
 
